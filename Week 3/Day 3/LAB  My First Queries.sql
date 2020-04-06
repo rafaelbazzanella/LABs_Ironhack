@@ -32,33 +32,33 @@ The count of ratings an app has received is in the rating_count_tot column.
 
 **8. Take a look at the data you retrieved in question 6. Give some insights.**
 
-	I can check that the top 10 best rated apps is not the best way to look at the data because we have a total of 964 with the highest score and when we select only 10 we hide the others. 
+	I can check that the top 10 best rated apps is not the best way to look at the data because we have a total of 492 with the highest score and when we select only 10 we hide the others. 
 
 **9. Now compare the data from questions 5 and 6. What do you see?**
 
 	SELECT track_name,sum(rating_count_tot),user_rating_ver FROM data GROUP BY track_name,user_rating_ver ORDER BY sum(rating_count_tot) DESC LIMIT 10;
-	I can  that some of the most rated apps do not have the best score. I see that the bible has the highest score and angrybird the lowest
+	I can  that some of the most rated apps do not have the best score. We can see that only facebook have a score lower than 4 from top 10
 
 
 **10. How could you take the top 3 regarding both user ratings and number of votes?**
 
-	SELECT track_name,sum(rating_count_tot),user_rating_ver FROM data GROUP BY track_name,user_rating_ver ORDER BY sum(rating_count_tot) DESC LIMIT 3;
+	SELECT track_name,sum(rating_count_tot),user_rating FROM data GROUP BY track_name,user_rating ORDER BY sum(rating_count_tot) DESC LIMIT 3;
 
 **11. Do people care about the price of an app?** Do some queries, comment why are you doing them and the results you retrieve. What is your conclusion?
 
-	SELECT track_name,sum(rating_count_tot),user_rating_ver,price FROM data GROUP BY track_name,user_rating_ver,price ORDER BY sum(rating_count_tot) DESC;
+	SELECT track_name,sum(rating_count_tot),user_rating,price FROM data GROUP BY track_name,user_rating,price ORDER BY sum(rating_count_tot) DESC;
 	Yes, they do. We can see that the most used apps are the one for free. 
-	SELECT count(user_rating_ver) FROM data WHERE user_rating_ver=5;
-	--964
-	SELECT count(user_rating_ver) FROM data WHERE user_rating_ver=5 AND price =0;
-	--491/4056
-	SELECT count(user_rating_ver) FROM data WHERE price =0;
+	SELECT count(user_rating) FROM data WHERE user_rating=5;
+	--492
+	SELECT count(user_rating) FROM data WHERE user_rating=5 AND price =0;
+	--255/4056
+	SELECT count(user_rating) FROM data WHERE price =0;
 	--4056
-	SELECT count(user_rating_ver) FROM data WHERE user_rating_ver=5 AND price !=0;
-	--473/3141
-	SELECT count(user_rating_ver) FROM data WHERE price !=0;
+	SELECT count(user_rating) FROM data WHERE user_rating=5 AND price !=0;
+	--237/3141
+	SELECT count(user_rating) FROM data WHERE price !=0;
 	--3141
-	We can also see that the apps that the payed apps have move chances of getting score 5 than free ones
+	We can also see that the apps that the payed apps have more chances of getting score 5 than free ones
 
 **Bonus: Find the total number of games available in more than 1 language.**
 
